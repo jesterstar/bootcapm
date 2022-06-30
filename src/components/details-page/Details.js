@@ -40,7 +40,17 @@ export const DetailsPage = () => {
         console.log('Data to save: ', { ...details, car: selectedCar });
     };
 
-    if (!details) return null;
+    if (!details) {
+        return (
+            <Container>
+                <Row>
+                    <Col>
+                        There is no data
+                    </Col>
+                </Row>
+            </Container>
+        );
+    }
 
     const { name, username, email } = details;
     const carsList = getCarsList(username);
