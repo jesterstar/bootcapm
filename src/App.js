@@ -1,20 +1,15 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
+import 'react-toastify/dist/ReactToastify.css';
 
-import {
-    BrowserRouter as Router,
-    Routes,
-    Route,
-    useParams
-} from 'react-router-dom';
-
+import { BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 import { DetailsPage, ListPage } from './components';
-import './App.css';
+import { PATH } from './utils';
 
 const App = () => (
     <Router>
         <Routes>
-            <Route exact path='/' element={<ListPage />} />
-            <Route path='/details/:detailId' element={<DetailsPage />} />
+            <Route path={PATH.list} element={<ListPage />} />
+            <Route path={`${PATH.details}/:id`} element={<DetailsPage />} />
         </Routes>
     </Router>
 );
