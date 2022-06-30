@@ -5,4 +5,4 @@ export const PATH = {
 
 export const API_ROUTE = 'https://jsonplaceholder.typicode.com';
 
-export const CAR_SOURCE = ['Audi', 'Skoda', 'BWM'];
+export const CAR_SOURCE = ['Skoda', 'Audi', 'BWM'];

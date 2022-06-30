@@ -2,15 +2,17 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import { Button, Col, Form, Row, Container } from 'react-bootstrap';
-import { getUser, CAR_SOURCE } from '../../utils';
+import { getUser, getCarsList } from '../../utils';
 
 export const DetailsPage = () => {
     const { id } = useParams();
     const [details, setDetails] = useState(null);
-    const [selectedCar, setSelectedCar] = useState(CAR_SOURCE[0] || '');
+    const [selectedCar, setSelectedCar] = useState('');
 
     useEffect(() => {
-        getUser(id).then(json => setDetails(json));
+        getUser(id).then(json => {
+            setDetails(json);
+        });
     }, [id]);
 
     const onInputChange = useCallback((e) => {
@@ -32,15 +34,16 @@ export const DetailsPage = () => {
          * Here should be some manipulations for the POST call
          */
         toast.success(
-            'Data saved, see console :)',
+            'Data was saved, see console :)',
             { position: 'bottom-right' }
         );
-        console.log('Data to post: ', { ...details, car: selectedCar });
+        console.log('Data to save: ', { ...details, car: selectedCar });
     };
 
     if (!details) return null;
 
     const { name, username, email } = details;
+    const carsList = getCarsList(username);
 
     return (
         <Container>
@@ -94,10 +97,9 @@ export const DetailsPage = () => {
                             <Form.Select
                                 aria-label="Select your car"
                                 onChange={onCarSelect}
-                                defaultValue={selectedCar}
                                 value={selectedCar}
                             >
-                                {CAR_SOURCE.map((car) => <option key={car} value={car}>{car}</option>)}
+                                {carsList.map((car) => <option key={car} value={car}>{car}</option>)}
                             </Form.Select>
                         </Form.Group>
 

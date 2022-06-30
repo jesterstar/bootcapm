@@ -9,7 +9,7 @@ export const ListPage = () => {
     useEffect(() => {
         getUsers().then(json => setData(json));
     }, []);
-    console.log(data);
+
     return (
         <Container>
             <Row>
